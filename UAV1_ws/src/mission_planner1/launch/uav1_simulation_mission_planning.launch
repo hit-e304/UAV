@@ -1,0 +1,9 @@
+<launch>
+
+    <!--<include file="$(find mavros)/launch/px4.launch"/>-->
+
+    <node pkg="mission_planner1" type="cam_sim_node" name="cam_simulate_node1" />
+    <node pkg="mission_planner1" type="digital_transmission_node" name="DR_node1" />
+    <node pkg="mission_planner1" type="one_drone_mission_planning_improved" name="formation_uav1" output="screen" />
+
+</launch>

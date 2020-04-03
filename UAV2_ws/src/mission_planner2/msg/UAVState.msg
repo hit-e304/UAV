@@ -1,0 +1,3 @@
+mavros_msgs/State UAV_state
+geometry_msgs/PoseStamped UAV_pose
+geometry_msgs/TwistStamped UAV_velocity_body

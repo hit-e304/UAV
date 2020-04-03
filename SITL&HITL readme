@@ -1,0 +1,41 @@
+硬件在环使用的是根目录下的src里面的Firmware，即：~/src/Firmware
+硬件在环仿真步骤总结：
+	1.cd ~/src/Firmware                                                                %进入目录%
+	2.source Tools/setup_gazebo.bash $(pwd) $(pwd)/build/posix_sitl_default            %source目录%
+	3.gazebo --verbose Tools/sitl_gazebo/worlds/iris.world                             %启动HITL%  -verbose %可以显示更多信息
+	4.执行offboard模式测试：
+		1.new terminal:
+			roslaunch -v mavros px4.launch fcu_url:="udp://:14540@127.0.0.1:14560"     %格式说明fcu_url:="udp://[bind_host][:port]@[:port]"
+		2.new terminal:
+			cd your-workspace/                                                 %进入你的工作空间目录
+			source devel/setup.bash                                            %source一下
+			rosrun or roslaunch your_packagename your_node_name                %跑你自己写的相关节点或launch文件
+
+
+
+
+软件在环使用的是Downloads目录下的src里面的Firmware，即：~/Downloads/src/Firmware
+软件在环仿真步骤总结：
+	单无人机：
+   	 	方法一：# 切换到固件目录
+			cd ~/src/Firmware
+			# 启动gazebo仿真
+			make posix_sitl_default gazebo
+			# 启动MAVROS,链接到本地ROS
+			roslaunch mavros px4.launch fcu_url:="udp://:14540@127.0.0.1:14557"
+			# 运行外部控制程序
+			cd ~/到你的工作空间
+			#catkin_make（如果已编译过就可不再进行编译）
+			source devel/setup.bash
+			rosrun offboard offboard_node（rosrun你自己的板外控制程序）
+    		方法二：#切换到固件目录
+			cd ~/src/Firmware
+			# source环境：
+			source Tools/setup_gazebo.bash $(pwd) $(pwd)/build/px4_sitl_default
+			export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$(pwd):$(pwd)/Tools/sitl_gazebo
+			# 运行单机仿真的launch文件
+			roslaunch px4 mavros_posix_sitl.launch
+			cd ~/到你的工作空间
+			#catkin_make（如果已编译过就可不再进行编译）
+			source devel/setup.bash
+			rosrun offboard offboard_node（rosrun你自己的板外控制程序）
