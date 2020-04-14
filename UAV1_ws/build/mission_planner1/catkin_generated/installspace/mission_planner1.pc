@@ -1,0 +1,8 @@
+prefix=/home/lihai/UAV/UAV1_ws/install
+
+Name: mission_planner1
+Description: Description of mission_planner1
+Version: 0.0.0
+Cflags: -I/home/lihai/UAV/UAV1_ws/install/include
+Libs: -L/home/lihai/UAV/UAV1_ws/install/lib 
+Requires: message_runtime

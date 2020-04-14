@@ -1,0 +1,2 @@
+mission_planner2:opencvtest:usb_cam
+-DCATKIN_DEVEL_PREFIX=/home/lihai/UAV/UAV2_ws/devel -DCMAKE_INSTALL_PREFIX=/home/lihai/UAV/UAV2_ws/install -G Unix Makefiles
